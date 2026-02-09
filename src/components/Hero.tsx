@@ -2,6 +2,15 @@ import { motion } from "framer-motion";
 import { ArrowDown, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import profilePhoto from "@/assets/profile-photo.jpg";
+import kubernetesLogo from "@/assets/kubernetes-logo.svg";
+import awsLogo from "@/assets/aws-logo.svg";
+import javaLogo from "@/assets/java-logo.svg";
+
+const certBadges = [
+  { logo: kubernetesLogo, label: "CKAD", name: "Kubernetes" },
+  { logo: awsLogo, label: "AWS SA", name: "AWS" },
+  { logo: javaLogo, label: "SCJP", name: "Java" },
+];
 
 const stats = [
   { value: "14+", label: "Years Experience" },
@@ -108,6 +117,32 @@ const Hero = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
+              {/* Certification Badges */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+                className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-3"
+              >
+                {certBadges.map((cert, i) => (
+                  <motion.div
+                    key={cert.name}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 1 + i * 0.15 }}
+                    className="group relative w-12 h-12 md:w-14 md:h-14 rounded-xl bg-card/80 backdrop-blur-sm border border-primary/20 flex items-center justify-center hover:border-primary/50 hover:scale-110 transition-all duration-300 cursor-pointer shadow-lg"
+                  >
+                    <img
+                      src={cert.logo}
+                      alt={cert.name}
+                      className="w-7 h-7 md:w-8 md:h-8 object-contain"
+                    />
+                    <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[10px] font-mono text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                      {cert.label}
+                    </span>
+                  </motion.div>
+                ))}
+              </motion.div>
               {/* Decorative elements */}
               <div className="absolute -top-4 -right-4 w-24 h-24 border border-primary/20 rounded-2xl" />
               <div className="absolute -bottom-4 -left-4 w-20 h-20 border border-primary/10 rounded-xl" />
