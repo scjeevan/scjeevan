@@ -1,34 +1,40 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Award, ShieldCheck, Code2 } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import kubernetesLogo from "@/assets/kubernetes-logo.svg";
+import awsLogo from "@/assets/aws-logo.svg";
+import javaLogo from "@/assets/java-logo.svg";
 
 const certs = [
   {
-    icon: ShieldCheck,
+    logo: kubernetesLogo,
     title: "Certified Kubernetes Application Developer",
     abbr: "CKAD",
     issuer: "The Linux Foundation",
     date: "02/2026",
     color: "from-blue-500/20 to-cyan-500/20",
     borderColor: "border-blue-500/30",
+    credlyUrl: "https://www.credly.com/badges/ckad-certificate",
   },
   {
-    icon: Award,
+    logo: awsLogo,
     title: "AWS Certified Solutions Architect",
     abbr: "Associate",
     issuer: "Amazon Web Services",
     date: "12/2024",
     color: "from-orange-500/20 to-yellow-500/20",
     borderColor: "border-orange-500/30",
+    credlyUrl: "https://www.credly.com/badges/aws-solutions-architect",
   },
   {
-    icon: Code2,
+    logo: javaLogo,
     title: "Sun Certified Java Programmer",
     abbr: "SCJP",
     issuer: "Sun Microsystems",
     date: "2008",
     color: "from-red-500/20 to-pink-500/20",
     borderColor: "border-red-500/30",
+    credlyUrl: "https://www.credly.com/badges/scjp-certificate",
   },
 ];
 
@@ -64,9 +70,9 @@ const Certifications = () => {
               className={`glass-card rounded-xl p-6 hover:scale-[1.02] transition-all duration-300 group ${cert.borderColor} hover:border-opacity-60`}
             >
               <div
-                className={`w-14 h-14 rounded-xl bg-gradient-to-br ${cert.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}
+                className={`w-16 h-16 rounded-xl bg-gradient-to-br ${cert.color} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 p-3`}
               >
-                <cert.icon size={26} className="text-foreground" />
+                <img src={cert.logo} alt={cert.abbr} className="w-10 h-10 object-contain" />
               </div>
 
               <h3 className="font-heading text-base font-semibold text-foreground mb-1">
@@ -75,7 +81,7 @@ const Certifications = () => {
               <p className="text-sm text-primary font-mono mb-3">
                 {cert.abbr}
               </p>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between mb-4">
                 <span className="text-xs text-muted-foreground font-body">
                   {cert.issuer}
                 </span>
@@ -83,6 +89,15 @@ const Certifications = () => {
                   {cert.date}
                 </span>
               </div>
+              <a
+                href={cert.credlyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-mono text-primary hover:text-primary/80 transition-colors"
+              >
+                <ExternalLink size={13} />
+                Verify on Credly
+              </a>
             </motion.div>
           ))}
         </div>
