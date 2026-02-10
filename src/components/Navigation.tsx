@@ -78,7 +78,16 @@ const Navigation = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setIsMobileOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMobileOpen(false);
+                    const target = document.querySelector(link.href);
+                    if (target) {
+                      setTimeout(() => {
+                        target.scrollIntoView({ behavior: "smooth" });
+                      }, 300);
+                    }
+                  }}
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors font-body py-2"
                 >
                   {link.label}
